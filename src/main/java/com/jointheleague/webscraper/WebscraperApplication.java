@@ -1,5 +1,6 @@
 package com.jointheleague.webscraper;
 
+import java.io.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,9 +24,14 @@ public class WebscraperApplication {
 		  buttonPress.click();
 		  buttonPress.click();
 		  
-		  //for(int t=2; t<100; t++)
-		  //{
-			  for (int i=1 ; i<2000; i++)
+		  
+		    try 
+		  {
+		    PrintWriter pw = new PrintWriter(new File("stockingReport.txt"));
+		  
+		  
+
+			  for (int i=1 ; i<1000; i++)
 			  {
 				  WebElement DateElement = null;
 				 
@@ -59,6 +65,7 @@ public class WebscraperApplication {
 				  if (County.equals("UTAH"))	
 				  {
 					  System.out.println(DateElement.getText()+", "+ReservoirElement.getText()+", "+FishElement.getText()+", "+LengthElement.getText()+", "+QuantityElement.getText()); 
+					  pw.println(DateElement.getText()+", "+ReservoirElement.getText()+", "+FishElement.getText()+", "+LengthElement.getText()+", "+QuantityElement.getText()); 
 				  } 
 				  else
 				  {
@@ -70,9 +77,24 @@ public class WebscraperApplication {
 
 			  }
 			  
+			  pw.close();
 
-		  //}
-		  
+		  } 
+		    catch (FileNotFoundException e) 
+		  {	
+			e.printStackTrace();
+		  }
+		    
+		    /*
+		     if (new stockingReport.txt = oldstocking report)
+		    {
+		    	nothing
+		    }
+		     else
+		    {
+		    	update stocking report.txt then send out a text message to me about the new info
+		    }
+		    */
 		  
 	}
 
